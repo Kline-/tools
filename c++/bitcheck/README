@@ -1,0 +1,16 @@
+PURPOSE
+  C++ program to display the values of 1 * 2^N and if a given number is found
+  within each value using bitwise math.
+
+STATUS
+  Working as of: 2012-02-22
+
+DETAILS
+  First argument is N for 1 * 2^N. Second argument is an interger to test
+  for using bitwise math. Ex: bitcheck 12 87375
+
+INSTALL
+  01 : Compile with "Make".
+  02 : Use and enjoy.
+
+

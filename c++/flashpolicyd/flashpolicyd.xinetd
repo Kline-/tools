@@ -1,0 +1,11 @@
+service flashpolicyd
+{
+        disable = no
+        wait = no
+        socket_type = stream
+        flags = IPv6
+        port = 843
+        user = nobody
+        server = /usr/local/sbin/flashpolicyd
+        server_args = /usr/local/etc/flashpolicyd.xml
+}

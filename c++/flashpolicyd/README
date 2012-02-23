@@ -1,0 +1,30 @@
+PURPOSE
+  C++ program to act as a policy file daemon for Adobe Flash clients.
+
+STATUS
+  Working as of: 2012-02-22
+
+DETAILS
+  Adobe Flash requires a policy file to be served on port 843 before
+  allowing TCP connections via a Flash application. This program is
+  designed to sit behind xinetd and send a policy file on request.
+  http://www.adobe.com/devnet/flashplayer/articles/socket_policy_files.html
+
+INSTALL
+  01 : Compile with "Make".
+  02 : Copy flashpolicyd to a location accessible to xinetd such as
+       /usr/local/sbin
+       Ensure the file can be executed: chmod +x flashpolicyd
+  02 : Copy flashpolicyd.xml to a location accessible to xinetd such as
+       /usr/local/etc
+       Edit the values to reflect your domain hostname and ports you
+       wish to allow Flash to connect to.
+  03 : Copy flashpolicyd.xinetd to the folder your system uses for xinetd
+       service files. On Debian-based distributions, this is
+       /usr/etc/xinetd.d
+       Edit the values to reflect where you have stored your flashpolicyd.xml
+       file.
+  04 : Restart or reload xinetd.
+  05 : Use and enjoy.
+
+
