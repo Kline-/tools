@@ -11,7 +11,7 @@ DETAILS
   http://www.adobe.com/devnet/flashplayer/articles/socket_policy_files.html
 
 INSTALL
-  01 : Compile with "Make".
+  01 : Compile with "make".
   02 : Copy flashpolicyd to a location accessible to xinetd such as
        /usr/local/sbin
        Ensure the file can be executed: chmod +x flashpolicyd

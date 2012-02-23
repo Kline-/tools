@@ -36,8 +36,8 @@ int main( const int argc, const char* argv[] )
         return 0;
     }
 
-    numbit = atoi(argv[1]);
-    value = atol(argv[2]);
+    numbit = atoi( argv[1] );
+    value = atol( argv[2] );
 
     if ( numbit < 1 || numbit > 64 )
     {
@@ -49,18 +49,18 @@ int main( const int argc, const char* argv[] )
     x = 1;
 
     cout << "[";
-    cout.width(wtab[numbit]+3);
+    cout.width( wtab[numbit] + 3 );
     cout << right << "Bit Value] [";
     cout.width(2);
     cout << "##";
-    cout.width(wtab[numbit]+3);
+    cout.width( wtab[numbit] + 3 );
     cout << left << "] [Remainder";
     cout << "]" << endl;
 
     for ( i; i <= numbit; i++ )
     {
         cout << "[";
-        cout.width(wtab[numbit]);
+        cout.width( wtab[numbit] );
         cout << right << x << "] [";
         if ( i < 10 )
          cout << 0 << i;
@@ -69,16 +69,17 @@ int main( const int argc, const char* argv[] )
         cout << "] [";
         if ( value & x )
         {
-            cout.width(wtab[numbit]);
+            cout.width( wtab[numbit] );
             cout << left << value << "]" << endl;
         }
         else
         {
-            cout.width(wtab[numbit]+1);
+            cout.width( wtab[numbit] + 1 );
             cout << right << " ]" << endl;
         }
         value &= ~x;
         x *= 2;
     }
+
     return 0;
 }
