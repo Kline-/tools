@@ -24,7 +24,11 @@ INSTALL
        /usr/etc/xinetd.d
        Edit the values to reflect where you have stored your flashpolicyd.xml
        file.
-  04 : Restart or reload xinetd.
-  05 : Use and enjoy.
+  04 : Optionally add the following line to the bottom of your services file.
+       flashpolicyd 843/tcp
+       On Debian-based distributions, this is
+       /etc/services
+  05 : Restart or reload xinetd.
+  06 : Use and enjoy.
 
 
