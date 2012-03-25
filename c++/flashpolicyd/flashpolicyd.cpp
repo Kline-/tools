@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main( int argc, char *argv[] )
+int main( const int argc, const char *argv[] )
 {
     char valid[] = "<policy-file-request/>\0";
     string request, line;
