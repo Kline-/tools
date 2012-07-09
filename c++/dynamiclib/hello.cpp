@@ -5,7 +5,7 @@ class Hello : public Plugin {
     public:
         virtual const void Run() const;
 
-		Hello( const string& name = "Hello" ) : Plugin( name ) {};
+        Hello( const string& name = "Hello" ) : Plugin( name ) {};
 };
 
 const void Hello::Run() const
