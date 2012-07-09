@@ -12,7 +12,7 @@ int main( const int argc, const char* argv[] )
 	char tmp[siz] = {'\0'};
 	string buf;
 
-	if ( ( pop = popen( "g++ -c -fpic hello.cpp 2>&1 && g++ -o hello.so hello.o -ldl -rdynamic -shared 2>&1", "r" ) ) != NULL )
+	if ( ( pop = popen( "g++ -o hello.so hello.cpp -fpic -ldl -rdynamic -shared 2>&1", "r" ) ) != NULL )
 	{
 		while ( !feof( pop ) )
 			if ( fgets( tmp, siz, pop ) != NULL )
