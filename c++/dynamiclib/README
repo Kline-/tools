@@ -1,0 +1,15 @@
+PURPOSE
+  C++ program to illustrate a basic plugin system. Plugins can be compiled
+  and loaded as needed by the main program.
+
+STATUS
+  Working as of: 2012-07-09
+
+DETAILS
+  This program is not very flexible (fixed strings, etc), but does provide
+  a working example to build from. The dynamiclib binary will build and
+  load hello.so, or output any errors while attempting to.
+
+INSTALL
+  01 : Compile with "make".
+  02 : Use and enjoy.
