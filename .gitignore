@@ -1,2 +1,5 @@
 c++/bitcheck/bitcheck
+c++/dynamiclib/dynamiclib
+c++/dynamiclib/hello.so
 c++/flashpolicyd/flashpolicyd
+c++/mysquid/mysquid

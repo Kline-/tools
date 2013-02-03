@@ -1,3 +1,24 @@
+/**
+ * Copyright (c) 2012-2013 Matt Goff <matt@goff.cc>
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ * claim that you wrote the original software. If you use this software
+ * in a product, an acknowledgment in the product documentation would be
+ * appreciated but is not required.
+ *
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ * misrepresented as being the original software.
+ *
+ * 3. This notice may not be removed or altered from any source distribution.
+ **/
 #include <iostream>
 #include <sstream>
 #include <stdlib.h>
@@ -7,8 +28,8 @@ using namespace std;
 #define MYSQUID_SERVER "localhost"
 #define MYSQUID_PORT   0
 #define MYSQUID_DB     "mysquid"
-#define MYSQUID_USER   "matt"
-#define MYSQUID_PASS   "matt"
+#define MYSQUID_USER   "squid"
+#define MYSQUID_PASS   "squid"
 
 #define MYSQUID_OK     "OK"
 #define MYSQUID_ERR    "ERR"
