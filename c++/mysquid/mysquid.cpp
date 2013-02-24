@@ -46,7 +46,7 @@ struct ThreadData
 const void spawn_thread( ThreadData* data );
 void* process_request( void* input );
 
-int main( const int argc, const char* argv[] )
+int main( const int argc, char* argv[] )
 {
     MYSQL sql;
     my_bool reconnect = true;
@@ -59,6 +59,10 @@ int main( const int argc, const char* argv[] )
         return 0;
     }
 
+    argv_ = argv[1];
+    for ( int i = 0; i < argv_.length(); i++ )
+        argv[1][i] = '\0';
+
     mysql_init( &sql );
     mysql_options( &sql, MYSQL_OPT_RECONNECT, &reconnect );
 
@@ -69,9 +73,6 @@ int main( const int argc, const char* argv[] )
 
         return 0;
     }
-
-    argv_ = argv[1];
-    argv[1] = '\0';
 
     while ( getline( cin, input ) )
     {
