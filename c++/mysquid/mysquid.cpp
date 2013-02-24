@@ -38,7 +38,6 @@ using namespace std;
 
 struct ThreadData
 {
-        MYSQL sql;
         string query;
         string input;
 };
@@ -48,8 +47,6 @@ void* process_request( void* input );
 
 int main( const int argc, char* argv[] )
 {
-    MYSQL sql;
-    my_bool reconnect = true;
     ThreadData* data;
     string argv_, input;
 
@@ -63,27 +60,17 @@ int main( const int argc, char* argv[] )
     for ( int i = 0; i < argv_.length(); i++ )
         argv[1][i] = '\0';
 
-    mysql_init( &sql );
-    mysql_options( &sql, MYSQL_OPT_RECONNECT, &reconnect );
-
-    if ( !mysql_real_connect( &sql, MYSQUID_SERVER, MYSQUID_USER, MYSQUID_PASS, MYSQUID_DB, MYSQUID_PORT, NULL, 0 ) )
-    {
-        cout << MYSQUID_ERR << mysql_error( &sql ) << endl;
-        mysql_close( &sql );
-
-        return 0;
-    }
+    mysql_library_init( 0, NULL, NULL );
 
     while ( getline( cin, input ) )
     {
         data = new ThreadData;
-        data->sql = sql;
         data->query = argv_ ;
         data->input = input;
         spawn_thread( data );
     }
 
-    mysql_close( &sql );
+    mysql_library_end();
 
     return 0;
 }
@@ -104,11 +91,24 @@ const void spawn_thread( ThreadData* data )
 void* process_request( void* input )
 {
     ThreadData* data = static_cast<ThreadData*>( input );
+    MYSQL sql;
     MYSQL_RES *res;
     MYSQL_ROW row;
+    my_bool reconnect = true;
     string channel, token;
     size_t start, end;
     stringstream split;
+
+    mysql_init( &sql );
+    mysql_options( &sql, MYSQL_OPT_RECONNECT, &reconnect );
+
+    if ( !mysql_real_connect( &sql, MYSQUID_SERVER, MYSQUID_USER, MYSQUID_PASS, MYSQUID_DB, MYSQUID_PORT, NULL, 0 ) )
+    {
+        cout << MYSQUID_ERR << mysql_error( &sql ) << endl;
+        mysql_close( &sql );
+
+        return 0;
+    }
 
     channel = data->input.substr( 0, data->input.find_first_of( ' ' ) );
     data->input.erase( 0, data->input.find_first_of( ' ' )+1 );
@@ -123,18 +123,20 @@ void* process_request( void* input )
             data->query.replace( start, end - start + 2, token );
     }
 
-    if ( mysql_query( &data->sql, data->query.c_str() ) )
-        cout << channel << MYSQUID_ERR << mysql_error( &data->sql ) << endl;
-    else if ( ( res = mysql_store_result( &data->sql ) ) == NULL )
-        cout << channel << MYSQUID_ERR << mysql_error( &data->sql ) << endl;
+    if ( mysql_query( &sql, data->query.c_str() ) )
+        cout << channel << MYSQUID_ERR << mysql_error( &sql ) << endl;
+    else if ( ( res = mysql_store_result( &sql ) ) == NULL )
+        cout << channel << MYSQUID_ERR << mysql_error( &sql ) << endl;
     else if ( ( row = mysql_fetch_row( res ) ) == NULL )
-        cout << channel << MYSQUID_ERR << mysql_error( &data->sql ) << endl;
+        cout << channel << MYSQUID_ERR << mysql_error( &sql ) << endl;
     else if ( mysql_num_rows( res ) == 0 )
         cout << channel << MYSQUID_ERR << endl;
     else
         cout << channel << MYSQUID_OK << endl;
 
     mysql_free_result( res );
+    mysql_close( &sql );
+    mysql_thread_end();
     delete data;
 
     pthread_exit( reinterpret_cast<void*>( EXIT_SUCCESS ) );
