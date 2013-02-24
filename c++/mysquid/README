@@ -1,9 +1,9 @@
 PURPOSE
-  C++ program to allow Squid proxy to interface with a MySQL database for
-  external ACL lookups.
+  Threaded C++ program to allow Squid proxy to interface with a MySQL
+  database for external ACL lookups.
 
 STATUS
-  Working as of: 2013-02-22
+  Working as of: 2013-02-24
 
 DETAILS
   A complete SQL query should be passed as a single argument via Squid.
@@ -11,7 +11,7 @@ DETAILS
   order between any double pairs of ##.
 
   If Squid passes %DST='test.com', ##TOK## would be replaced in the following:
-    external_acl_type mysquid %DST /path/to/mysquid "SELECT `url` FROM `blocked_domains` WHERE `url` LIKE '##TOK##';"
+    external_acl_type mysquid children=1 concurrency=100 %DST /path/to/mysquid "SELECT `url` FROM `blocked_domains` WHERE `url` LIKE '##TOK##';"
   Resulting in a SQL query of:
     SELECT `url` from `blocked_domains` WHERE `url` LIKE 'test.com';
 

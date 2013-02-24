@@ -1,2 +1,2 @@
 all:
-	$(CXX) mysquid.cpp -o mysquid -lmysqlclient
+	$(CXX) mysquid.cpp -o mysquid -lmysqlclient -lpthread
