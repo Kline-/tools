@@ -29,8 +29,8 @@ using namespace std;
 #define MYSQUID_SERVER "localhost"
 #define MYSQUID_PORT   0
 #define MYSQUID_DB     "mysquid"
-#define MYSQUID_USER   "matt"
-#define MYSQUID_PASS   "matt"
+#define MYSQUID_USER   "mysquid"
+#define MYSQUID_PASS   "mysquid"
 
 #define MYSQUID_OK     " OK"
 #define MYSQUID_ERR    " ERR"
