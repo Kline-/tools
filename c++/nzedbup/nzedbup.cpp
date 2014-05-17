@@ -57,7 +57,7 @@ int main( const int argc, char* argv[] )
 
     for ( ; ; )
     {
-        ::sleep( 10 );
+        sleep( 10 );
     }
 
     return 0;
@@ -81,7 +81,7 @@ void* process_request( void* input )
     ThreadData* data = static_cast<ThreadData*>( input );
 
     system( data->args.c_str() );
-    ::sleep( data->sleep );
+    sleep( data->sleep );
     spawn_thread( data );
 
     return 0;
