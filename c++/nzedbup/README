@@ -5,15 +5,14 @@ STATUS
   Working as of: 2014-05-17
 
 DETAILS
-  This program uses system() calls to execute update_binaries.php and
-  update_releases.php. By default, update_binaries.php will pause 60s
-  between executions and update_releases.php will pause 120s between
-  executions.
+  This program uses system() calls to execute various PHP files required
+  to keep nZEDb up to date. Each script is processed in its own thread
+  and waits for a fixed delay between executions.
 
   Assumptions are made that php-cli is executable as "php" and that the
-  nzedbup binary is placed in the same directory as the two PHP scripts
-  it calls. If you would like to change these parameters, they are all
-  defined at the top of the cpp file and easy to modify.
+  nzedbup binary is placed in the nzedb/misc/update folder of your
+  nZEDb installation. If you would like to change these parameters,
+  they are all defined at the top of the cpp file and easy to modify.
 
 INSTALL
   01 : Compile with "make".
