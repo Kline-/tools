@@ -29,7 +29,7 @@ using namespace std;
 #define NZEDBUP_BINARIES_CMD   "php update_binaries.php"
 #define NZEDBUP_BINARIES_SLEEP 60
 
-#define NZEDBUP_RELEASES_CMD   "php update_releases 1 true"
+#define NZEDBUP_RELEASES_CMD   "php update_releases.php 1 true"
 #define NZEDBUP_RELEASES_SLEEP 120
 
 struct ThreadData
