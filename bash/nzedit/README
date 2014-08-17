@@ -1,0 +1,19 @@
+PURPOSE
+  Shell script to manage a null zone file for BIND DNS server.
+
+STATUS
+  Working as of: 2014-08-17
+
+DETAILS
+  This script allows adding, removing, and displaying a sorted
+  list of domain names to be used in a BIND null zone file.
+  There is also support for adding comments alongside each
+  entry.
+
+INSTALL
+  01 : Modify the file paths in the script to suit where
+       your null zone files are.
+  02 : Optionally modify the output messages.
+  03 : Copy to /usr/local/sbin and chmod +x.
+  04 : Use and enjoy.
+

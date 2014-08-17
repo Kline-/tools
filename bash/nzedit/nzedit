@@ -1,0 +1,148 @@
+#!/bin/bash
+#
+# Copyright (c) 2012-2014 Matthew Goff <matt@goff.cc>
+#
+# This software is provided 'as-is', without any express or implied
+# warranty. In no event will the authors be held liable for any damages
+# arising from the use of this software.
+#
+# Permission is granted to anyone to use this software for any purpose,
+# including commercial applications, and to alter it and redistribute it
+# freely, subject to the following restrictions:
+#
+# 1. The origin of this software must not be misrepresented; you must not
+# claim that you wrote the original software. If you use this software
+# in a product, an acknowledgment in the product documentation would be
+# appreciated but is not required.
+#
+# 2. Altered source versions must be plainly marked as such, and must not be
+# misrepresented as being the original software.
+#
+# 3. This notice may not be removed or altered from any source distribution.
+#
+### START: CONFIG VALUES
+## The name of the domain. Second argument passed to the script. Shouldn't need to be modified.
+# Default: DOMNAME="$2"
+DOMNAME="$2"
+
+## An optional comment to add alongside the domain.
+# Default: COMMENT="${@:3}"
+COMMENT="${@:3}"
+
+## The zone database to point null zones at.
+# Default: ZONEDB="/var/lib/bind/db.null.zones"
+ZONEDB="/var/lib/bind/db.null.zones"
+
+## The zone file to apply updates to.
+# Default: ZONEFILE="/etc/bind/null.zones"
+ZONEFILE="/etc/bind/null.zones"
+
+## Template for zone file additions. Probably don't need to modify.
+# Default: TEMPLATE=
+TEMPLATE="zone \"$DOMNAME\" IN { type master; notify no; file \"$ZONEDB\"; };"
+### END: CONFIG VALUES
+
+### START: OUTPUT MESSAGES
+## The following variables are available for use:
+# %cmds%     List of accepted commands.
+# %script%   Name of this script.
+# %domname%  Name of domain that was passed.
+# %zonefile% The zone file to apply updates to.
+M_ADDED="Successfully added %domname% to null zone file."
+M_DELETED="Successfully deleted %domname% from null zone file."
+M_EXISTS="Domain %domname% already exists within the null zone file."
+M_NOEXISTS="Domain %domname% was not found within the null zone file."
+M_NOTLD="Domain %domname% contained no TLD. Exiting."
+M_USAGE="%script%: {%cmds%} [domain] [comment]"
+### END: OUTPUT MESSAGES
+
+#####                          #####
+##### NO FURTHER CONFIGURATION #####
+#####                          #####
+
+## wrapper for echo to do replacement with sed.
+secho()
+{
+    _cmds="add|del|list|reload"
+    _script=$(basename $0)
+    _domname=$DOMNAME
+    _zonefile=$ZONEFILE
+    echo "$1" | sed -e "s#%cmds%#$_cmds#g" \
+                    -e "s#%script%#$_script#g" \
+                    -e "s#%domname%#$_domname#g" \
+                    -e "s#%zonefile%#$_zonefile#g"
+}
+
+## display usage and exit.
+show_help()
+{
+    secho "$M_USAGE"
+    exit 0
+}
+
+## check if domain exists.
+check_exist()
+{
+    if grep -q "$1" "$2"; then
+        EXISTS=1
+    else
+        EXISTS=0
+    fi
+}
+
+# sanity check.
+if [ "$1" != "list" ] && [ "$1" != "reload" ]; then
+    if [ -z "$DOMNAME" ]; then
+        show_help
+        exit 1
+    fi
+fi
+
+check_exist "$DOMNAME" "$ZONEFILE"
+
+case "$1" in
+    add)
+        if [[ ! "$DOMNAME" =~ ^.+\.[A-Za-z]{2,}$ ]]; then
+            secho "$M_NOTLD"
+            exit 1
+        elif [ $EXISTS -eq 1 ]; then
+            secho "$M_EXISTS"
+            exit 1
+        else
+            if [ -z "$COMMENT" ]; then
+    	        echo "$TEMPLATE" >> "$ZONEFILE"
+                secho "$M_ADDED"
+            else
+                echo "$TEMPLATE # $COMMENT" >> "$ZONEFILE"
+                secho "$M_ADDED"
+            fi
+            exit 0
+        fi
+    ;;
+    del)
+        if [[ ! "$DOMNAME" =~ ^.+\.[A-Za-z]{2,}$ ]]; then
+            secho "$M_NOTLD"
+            exit 1
+        elif [ $EXISTS -eq 0 ]; then
+            secho "$M_NOEXISTS"
+            exit 1
+        else
+            sed -i".bak" "/$DOMNAME/d" "$ZONEFILE"
+            secho "$M_DELETED"
+            exit 0
+        fi
+    ;;
+    list)
+        awk '{print $2,$13,$14,$15,$16}' "$ZONEFILE" | sed -e 's/\"//g'
+        exit 0
+    ;;
+    reload)
+        service bind9 reload
+        exit 0
+    ;;
+    *)
+        show_help
+        exit 1
+esac
+
+exit 0
