@@ -14,6 +14,6 @@ INSTALL
   01 : Modify the file paths in the script to suit where
        your null zone files are.
   02 : Optionally modify the output messages.
-  03 : Copy to /usr/local/sbin and chmod +x.
+  03 : Copy nzedit to /usr/local/sbin and chmod +x.
   04 : Use and enjoy.
 

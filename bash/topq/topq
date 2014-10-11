@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Top 20 Domains"
+echo ""
+
+cat /var/log/bind/query.log* | grep 'queries' | cut -d ' ' -f 11 | sort | uniq -c | sort -nr | head -n 20
+
+echo ""

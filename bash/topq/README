@@ -1,0 +1,19 @@
+PURPOSE
+  Shell script to output the top 20 most requested DNS lookups
+  from a BIND DNS server.
+
+STATUS
+  Working as of: 2014-10-10
+
+DETAILS
+  This script will count and display the top 20 most requested
+  DNS lookups from a BIND DNS server. Requires grep. Tested on
+  Debian.
+
+INSTALL
+  01 : Include named.conf.topq in your named.conf file.
+  02 : Create the /var/log/bind folder and ensure your BIND
+       process has write permissions to it.
+  03 : Copy to topq /usr/local/sbin and chmod +x.
+  04 : Use and enjoy.
+

@@ -1,0 +1,17 @@
+logging {
+        channel query_log {
+                file "/var/log/bind/query.log" versions 10 size 50m;
+                print-time yes;
+                print-severity yes;
+                print-category yes;
+        };
+
+        category default {
+                query_log;
+        };
+
+        category queries {
+                query_log;
+        };
+};
+
