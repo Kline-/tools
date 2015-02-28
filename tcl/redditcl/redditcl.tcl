@@ -12,7 +12,7 @@ namespace eval ::redditcl:: {
     variable auth ""
     variable baseurl "https://oauth.reddit.com"
     variable header ""
-    variable useragent "redditcl/_Kline"
+    variable useragent "redditcl/"
 
     ::http::config -useragent $::redditcl::useragent
     ::http::register https 443 [list ::tls::socket -tls1 1]
