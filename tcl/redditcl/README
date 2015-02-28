@@ -1,0 +1,18 @@
+PURPOSE
+  TCL wrapper to perform simple GET API calls on reddit.com.
+
+STATUS
+  Working as of: 2015-02-28
+
+DETAILS
+  Currently only Only GET API calls are supported. It shouldn't be too
+  difficult to write your own routines for POST and other calls though.
+  There is also no error handling or re-acquiring of a token. This is
+  currently a *very* simple wrapper / proof of concept.
+
+INSTALL
+  01 : Call ::redditcl:get:token with your API credentials.
+  02 : Make all future calls to ::redditcl:get:api with the URL of the
+       API call, such as "/api/v1/me".
+  03 : Use and enjoy.
+
