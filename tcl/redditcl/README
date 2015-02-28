@@ -7,12 +7,15 @@ STATUS
 DETAILS
   Currently only Only GET API calls are supported. It shouldn't be too
   difficult to write your own routines for POST and other calls though.
-  There is also no error handling or re-acquiring of a token. This is
-  currently a *very* simple wrapper / proof of concept.
+  There is also no error handling or re-acquiring of a token, no rate
+  limiting, etc. This is currently a *very* simple wrapper / proof of
+  concept.
 
 INSTALL
-  01 : Call ::redditcl:get:token with your API credentials.
-  02 : Make all future calls to ::redditcl:get:api with the URL of the
+  01 : Change the useragent to include your username, or at least
+       something unique (respect reddit's API policy).
+  02 : Call ::redditcl:get:token with your API credentials.
+  03 : Make all future calls to ::redditcl:get with the URL of the
        API call, such as "/api/v1/me".
-  03 : Use and enjoy.
+  04 : Use and enjoy.
 
