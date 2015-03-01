@@ -5,7 +5,7 @@ STATUS
   Working as of: 2015-02-28
 
 DETAILS
-  Currently only Only GET API calls are supported. It shouldn't be too
+  Currently only GET API calls are supported. It shouldn't be too
   difficult to write your own routines for POST and other calls though.
   There is also no error handling or re-acquiring of a token, no rate
   limiting, etc. This is currently a *very* simple wrapper / proof of
