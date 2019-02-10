@@ -1,0 +1,17 @@
+PURPOSE
+  NZBGet PP script to maintain files in a flat directory structure.
+
+STATUS
+  Working as of: 2019-02-10
+
+DETAILS
+  This post-processing script looks for files based on a list
+  of approved extensions then moves them to a defined folder.
+  It can optionally also remove the original download directory
+  and any remaining files in it. Tested on Debian with NZBGet 20.0.
+
+INSTALL
+  01 : Copy the file to your NZBGet scripts folder and chmod +x.
+  02 : Set config options via the NZBGet settings menu.
+  03 : Use and enjoy.
+
