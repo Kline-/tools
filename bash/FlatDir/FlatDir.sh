@@ -42,8 +42,8 @@ if [ "$NZBPP_TOTALSTATUS" != "SUCCESS" ]; then
 fi
 
 for i in $NZBPO_EXTENSIONS; do
-	if [ -f "$NZBPP_DIRECTORY/"*.$i ]; then
-		FILES=$(ls "$NZBPP_DIRECTORY/"*.$i)
+	if [ -f "$NZBPP_DIRECTORY/"*".$i" ]; then
+		FILES=$(ls "$NZBPP_DIRECTORY/"*".$i")
 		mv "$FILES" "$NZBPO_DESTDIR"
 		echo "[DETAIL] Successfully moved "$(basename "$FILES")
 		FOUND=true
