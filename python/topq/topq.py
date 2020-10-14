@@ -15,7 +15,6 @@ for file in os.listdir(logdir):
 	if file.startswith('query'):
 		with open(logdir + file, 'r') as fd:
 			for line in fd.read().split('\n'):
-				if 'home.goff.cc' in line: continue
 				if 'query:' not in line: continue
 
 				spl = line.split()
