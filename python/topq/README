@@ -1,0 +1,19 @@
+PURPOSE
+  Python script to output the top N most requested DNS lookups
+  and clients from a BIND DNS server.
+
+STATUS
+  Working as of: 2020-10-14
+
+DETAILS
+  This script will count and display the top N most requested
+  DNS lookups and clients from a BIND DNS server. Tested on
+  Debian.
+
+INSTALL
+  01 : Include named.conf.topq in your named.conf file.
+  02 : Create the /var/log/bind folder and ensure your BIND
+       process has write permissions to it.
+  03 : Copy to topq.py /usr/local/sbin and chmod +x. (optionally remove .py extension)
+  04 : Use and enjoy.
+
